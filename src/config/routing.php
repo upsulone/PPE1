@@ -3,7 +3,9 @@
 function getPage($db) {
 // Inscrire vos contrôleurs ici
     $lesPages['accueil'] = "actionAccueil;0";
-    $lesPages['one'] = "actionOne;0";
+    $lesPages['connexion'] = "actionConnexion;0";
+    $lesPages['inscrire'] = "actionInscrire;0";
+    $lesPages['deconnexion'] = "actionDeconnexion;0";
 
     if ($db != null) {
         if (isset($_GET['page'])) {
