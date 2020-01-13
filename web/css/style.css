@@ -43,7 +43,12 @@ strong
 
 a
 {
-    color: #ffffff;
+    color: #2056ac;
+}
+
+.nav > li > a {
+
+    color: #fff;
 }
 
 a:hover
