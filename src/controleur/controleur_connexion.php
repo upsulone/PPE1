@@ -14,7 +14,9 @@ function actionConnexion($twig, $db) {
                 $form['message'] = 'Login ou mot de passe incorrect';
             } else {
                 $_SESSION['login'] = $inputEmail;
-                $_SESSION['role'] = $unUtilisateur['idRole'];          
+                $_SESSION['role'] = $unUtilisateur['idRole']; 
+                $datedernier = date("Y-m-d");
+                $unUtilisateur = $utilisateur->updateconnect($inputEmail, $datedernier);
                 header("Location:index.php");
             }
         } else {

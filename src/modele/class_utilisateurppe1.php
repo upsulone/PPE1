@@ -11,6 +11,7 @@ class Utilisateurppe1 {
     private $update;
     private $updatesansphoto;
     private $updateuniquementphoto;
+    private $updateconnect;
 
 //    private $selectByEmailPhoto;
 
@@ -26,7 +27,7 @@ class Utilisateurppe1 {
         $this->update = $db->prepare("update utilisateurppe1 set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role, photo=:photo where email=:email");
         $this->updatesansphoto = $db->prepare("update utilisateurppe1 set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role where email=:email");
         $this->updateuniquementphoto = $db->prepare("update utilisateurppe1 set photo=:photo where email=:email");
-        $this->updatedatedernier = $db->prepare("update datedernier from utilisateurppe1 where email=:email limit 1");
+        $this->updateconnect = $db->prepare("update utilisateurppe1 set datedernier=:datedernier where email=:email");
     }
 
     public function insert($email, $mdp, $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique) {
@@ -102,12 +103,12 @@ class Utilisateurppe1 {
         }
         return $r;
     }
-
-    public function updatedatedernier($datedernier, $email) {
+    
+    public function updateconnect($email, $datedernier) {
         $r = true;
-        $this->updatedatedernier->execute(array(':datedernier' => $datedernier, ':email' => $email));
-        if ($this->updatedatedernier->errorCode() != 0) {
-            print_r($this->updatedatedernier->errorInfo());
+        $this->updateconnect->execute(array(':email' => $email, ':datedernier' => $datedernier));
+        if ($this->updateconnect->errorCode() != 0) {
+            print_r($this->updateconnect->errorInfo());
             $r = false;
         }
         return $r;

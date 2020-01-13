@@ -10,7 +10,7 @@ body
     background: #2056ac;
     font-family: 'Questrial', sans-serif;
     font-size: 12pt;
-    color: rgba(0,0,0,.6);
+    color: #2056ac;
 }
 
 
@@ -43,7 +43,7 @@ strong
 
 a
 {
-    color: #2056ac;
+    color: #ffffff;
 }
 
 a:hover
@@ -323,7 +323,7 @@ ul.contact li a:before
 
 #logo
 {
-    padding: 8em 0em 4em 0em;
+    padding: 2em 0em 4em 0em;
 }
 
 #logo h1
@@ -358,22 +358,10 @@ ul.contact li a:before
 /* Menu                                                                          */
 /*********************************************************************************/
 
-#menu
-{
-    height: 60px;
-}
 
-#menu ul
-{
-    display: inline-block;
-    padding: 0em 2em;
-    text-align: center;
-}
 
-#menu li
-{
-    display: inline-block;
-}
+
+
 
 #menu li a, #menu li span
 {
@@ -385,7 +373,6 @@ ul.contact li a:before
     text-transform: uppercase;
     line-height: 60px;
     outline: 0;
-    color: #FFF;
 }
 
 #menu li:hover a, #menu li.active a, #menu li.active span
@@ -550,7 +537,7 @@ ul.contact li a:before
 {
     overflow: hidden;
     padding: 5em 0em;
-    border-top: 20px solid rgba(255,255,255,0.08);
+    border-top: 20px solid ;
     text-align: center;
 }
 

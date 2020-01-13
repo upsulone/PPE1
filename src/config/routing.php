@@ -6,6 +6,8 @@ function getPage($db) {
     $lesPages['connexion'] = "actionConnexion;0";
     $lesPages['inscrire'] = "actionInscrire;0";
     $lesPages['deconnexion'] = "actionDeconnexion;0";
+    $lesPages['mentions'] = "actionMentions;0";
+    $lesPages['contact'] = "actionContact;0";
 
     if ($db != null) {
         if (isset($_GET['page'])) {

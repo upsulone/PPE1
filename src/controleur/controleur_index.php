@@ -10,5 +10,8 @@ function actionDeconnexion($twig) {
     header("Location:index.php");
 }
 
+function actionMentions($twig) {
+    echo $twig->render('mentionslegales.html.twig', array());
+}
 
 ?>

@@ -12,7 +12,7 @@ function actionInscrire($twig, $db) {
         $role = $_POST['role'];
         $photo = NULL;
         $dateinscription = date("Y-m-d"); //Ici le format n'est pas important dans le sens ou on ne le voit pas, et on l'affiche dans le profil en tant que date au bon format.
-        $datedernier = time();
+        $datedernier = date("Y-m-d"); 
         $numunique= uniqid();
         if (isset($_FILES['photo'])) {
             if (!empty($_FILES['photo']['name'])) {
