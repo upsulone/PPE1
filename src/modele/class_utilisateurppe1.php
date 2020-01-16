@@ -12,6 +12,7 @@ class Utilisateurppe1 {
     private $updatesansphoto;
     private $updateuniquementphoto;
     private $updateconnect;
+    private $updaterecup;
 
 //    private $selectByEmailPhoto;
 
@@ -28,6 +29,7 @@ class Utilisateurppe1 {
         $this->updatesansphoto = $db->prepare("update utilisateurppe1 set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role where email=:email");
         $this->updateuniquementphoto = $db->prepare("update utilisateurppe1 set photo=:photo where email=:email");
         $this->updateconnect = $db->prepare("update utilisateurppe1 set datedernier=:datedernier where email=:email");
+        $this->updaterecup = $db->prepare("update utilisateurppe1 set daterecup=:daterecup, numrecup=:numrecup where email=:email");
     }
 
     public function insert($email, $mdp, $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique) {
@@ -103,12 +105,22 @@ class Utilisateurppe1 {
         }
         return $r;
     }
-    
+
     public function updateconnect($email, $datedernier) {
         $r = true;
         $this->updateconnect->execute(array(':email' => $email, ':datedernier' => $datedernier));
         if ($this->updateconnect->errorCode() != 0) {
             print_r($this->updateconnect->errorInfo());
+            $r = false;
+        }
+        return $r;
+    }
+
+    public function updaterecup($daterecup, $numrecup, $email) {
+        $r = true;
+        $this->updaterecup->execute(array(':daterecup' => $daterecup, ':numrecup' => $numrecup, ':email' => $email,));
+        if ($this->updaterecup->errorCode() != 0) {
+            print_r($this->updaterecup->errorInfo());
             $r = false;
         }
         return $r;

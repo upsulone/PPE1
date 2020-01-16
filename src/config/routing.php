@@ -13,6 +13,7 @@ function getPage($db) {
     $lesPages['modifphoto'] = "actionModifPhoto;0";
     $lesPages['modifcompte'] = "actionModifCompte;0";
     $lesPages['mdpoublie'] = "actionMdpOublie;0";
+    $lesPages['checkmail'] = "actionCheckMail;0";
     
 
     if ($db != null) {

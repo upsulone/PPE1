@@ -50,7 +50,7 @@ AAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
                 $photo = 'vide.jpg'; //fait en sorte que si $photo est vide (lors de l'insertion) alors on mets le vide.png de base
             }
             $exec = $utilisateur->insert($inputEmail, password_hash($inputPassword,
-                            PASSWORD_DEFAULT), $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique);
+                            PASSWORD_DEFAULT), $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique); 
             if (!$exec) {
                 $form['valide'] = false;
                 $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
