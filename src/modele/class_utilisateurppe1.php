@@ -17,9 +17,9 @@ class Utilisateurppe1 {
 
 
 
-    public function __construct($db) {  //c'est le constructeur qui s'exécute quand on fait un new UtilisateurVTTL ($utilisateurVTTL = new UtilisateurVTTL($db);) dans le controleur_utilisateur
+    public function __construct($db) {
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
-        $this->insert = $db->prepare("insert into utilisateurppe1(email, mdp, nom, prenom, idRole, photo, dateinscription, datedernier, numunique) values (:email, :mdp, :nom, :prenom, :role, :photo, :dateinscription, :datedernier, :numunique)");
+        $this->insert = $db->prepare("insert into utilisateurppe1(email, mdp, idRole, nom, prenom, photo, dateinscription, datedernier, numunique) values (:email, :mdp, :role, :nom, :prenom, :photo, :dateinscription, :datedernier, :numunique)");
         $this->connect = $db->prepare("select email, idRole, mdp from utilisateurppe1 where email=:email");
         $this->select = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, numunique r.libelle as libellerole from utilisateurppe1 u, rolevttl r where u.idRole = r.id order by nom");
         $this->delete = $db->prepare("delete from utilisateurppe1 where utilisateurppe1.email=:email"); //requette ok

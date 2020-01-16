@@ -14,4 +14,8 @@ function actionMentions($twig) {
     echo $twig->render('mentionslegales.html.twig', array());
 }
 
+function actionApropos($twig) {
+    echo $twig->render('apropos.html.twig', array());
+}
+
 ?>

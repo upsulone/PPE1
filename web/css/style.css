@@ -35,6 +35,8 @@ ol, ul
 p
 {
     line-height: 180%;
+    padding-left: 20%;
+    padding-right: 20%
 }
 
 strong
@@ -754,5 +756,34 @@ ul.tools li a:before
   border: 5px solid #2056ac;
 }
 
+.image-compte{
+  border: none;
+  -moz-border-radius : 75px;
+  -webkit-border-radius : 75px;
+  border-radius : 50px;
+  border: 5px solid #2056ac;
+}
 
+.image-modif{
+  border: none;
+  -moz-border-radius : 75px;
+  -webkit-border-radius : 75px;
+  border-radius : 50px;
+  border: 5px solid #2056ac;
+}
+
+.bouton-compte{
+    display: inline-block;
+    margin-top: 2em;
+    padding: 0.8em 2em;
+    background: #337ab7;
+    line-height: 1.8em;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-size: 1em;
+    color: #fff;
+    border-radius: 6px;
+    
+    
+}
 

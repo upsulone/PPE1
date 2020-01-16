@@ -8,6 +8,12 @@ function getPage($db) {
     $lesPages['deconnexion'] = "actionDeconnexion;0";
     $lesPages['mentions'] = "actionMentions;0";
     $lesPages['contact'] = "actionContact;0";
+    $lesPages['apropos'] = "actionApropos;0";
+    $lesPages['moncompte'] = "actionCompte;0";
+    $lesPages['modifphoto'] = "actionModifPhoto;0";
+    $lesPages['modifcompte'] = "actionModifCompte;0";
+    $lesPages['mdpoublie'] = "actionMdpOublie;0";
+    
 
     if ($db != null) {
         if (isset($_GET['page'])) {
