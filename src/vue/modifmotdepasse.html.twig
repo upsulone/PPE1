@@ -7,13 +7,13 @@
     {% if form.valide is defined %}
         {% if form.valide == true %}
             <div class="wrapper" style="text-align: center">
-                <h1 class="h3 mb-3 font-weight-normal">OK</h1>
-                <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{form.email}}</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Mot de passe réinitialisé !</h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=connexion">Me connecter</a></h1>
             </div>
         {% else %}
             <div class="wrapper" style="text-align: center">
                 <h1 class="h3 mb-3 font-weight-normal">Erreur : {{form.message}}</h1>
-                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=inscrire">S'inscrire</a></h1>
+                <h1 class="h3 mb-3 font-weight-normal"><a href="index.php">Accueil</a></h1>
             </div>
         {% endif %}
 
@@ -36,11 +36,15 @@
 
                 <label for="inputNewPassword" class="sr-only">Nouveau mot de passe:</label>
                 <input type="password" id="inputNewPassword" name="inputNewPassword" class="form-control"
-                       placeholder="Nouveau mot de passe" value="{{form.utilisateur.newmdp}}">
+                       placeholder="Nouveau mot de passe">
 
                 <label for="inputConfirmNewPassword" class="sr-only">Mot de passe:</label>
                 <input type="password" id="inputConfirmNewPassword" name="inputConfirmNewPassword" class="form-control"
                        placeholder="Confirmation du nouveau mot de passe">
+                
+                <input type="hidden" id="inputId" name="inputId" class="form-control" value="{{form.id}}">
+                
+                
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit" name="btNewMdp">Réinitialiser</button>
 

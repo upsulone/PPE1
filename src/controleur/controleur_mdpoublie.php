@@ -100,7 +100,7 @@ a[x-apple-data-detectors] {
                       <td align="center" style="padding:0;Margin:0;"><a target="_blank" href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;"><img class="adapt-img" src="https://funeck.stripocdn.email/content/guids/CABINET_3c9063ad7d67414d03ae9474cb7b1773/images/25751579035521779.JPG" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="560"></a></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-                      <td style="padding:0;Margin:0;"><br><br><br><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica, sans-serif;line-height:21px;color:#333333;text-align:center;">Bonjour, pour récuperer votre mot de passe veuillez cliquer <a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=modifmotdepasse&email='.$inputEmail.'&id='.$numrecup.'" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;">ici</a></p><br><br><br></td> 
+                      <td style="padding:0;Margin:0;"><br><br><br><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica, sans-serif;line-height:21px;color:#333333;text-align:center;">Bonjour, pour récuperer votre mot de passe veuillez cliquer <a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=modifmotdepasse&email=' . $inputEmail . '&id=' . $numrecup . '" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;">ici</a></p><br><br><br></td> 
                      </tr> 
                    </table></td> 
                  </tr> 
@@ -146,10 +146,52 @@ function actionCheckMail($twig, $db) {
 
 function actionModifMotDePasse($twig, $db) {
     $form = array();
-    $inputEmail = $_GET['email'];
-    $form['email'] = $inputEmail;    
+    if (isset($_GET['email'])) {
+        $inputEmail = $_GET['email'];
+        $inputId = $_GET['id'];
+        $form['email'] = $inputEmail;
+        $form['id'] = $inputId;
+        $utilisateur = new Utilisateurppe1($db);
+        $unUtilisateur = $utilisateur->selectByEmail($_GET['email']);
+        if ($unUtilisateur != null) {
+            $form['utilisateur'] = $unUtilisateur;
+            if (isset($_GET['id'])) {
+                $verifId = $_GET['id'];
+                if ($verifId == $unUtilisateur{'numrecup'}) {
+                    $form['message'] = 'Code correct';
+                } else {
+                    $form['message'] = 'Code incorrect';
+                }
+            }
+        } else {
+            $form['message'] = 'Utilisateur incorrect';
+        }
+    }
+    if (isset($_POST['btNewMdp'])) {
+        $email = $_POST['inputEmail'];
+        $utilisateur = new Utilisateurppe1($db);
+        $mdp = $_POST['inputNewPassword'];
+        $mdp2 = $_POST['inputConfirmNewPassword'];
+        if (empty($mdp)) {
+            $form['message'] = 'Veuillez rentrer un mot de passe';
+        } else {
+            if ($mdp != $mdp2) {
+                $form['valide'] = false;
+                $form['message'] = 'Les mots de passe sont différents';
+            } else {
+
+                $exec = $utilisateur->updatemdp($email, password_hash($mdp, PASSWORD_DEFAULT));
+                if (!$exec) {
+                    $form['valide'] = false;
+                    $form['message'] = 'Échec de la modification';
+                } else {
+                    $form['valide'] = true;
+                    $form['message'] = 'Modification réussie';
+                }
+            }
+        }
+    }
     echo $twig->render('modifmotdepasse.html.twig', array('form' => $form));
 }
-
 
 ?>

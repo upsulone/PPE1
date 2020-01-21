@@ -30,7 +30,7 @@ function actionModifCompte($twig, $db) {
             $form['message'] = 'Utilisateur incorrect';
         }
     } else {
-        if (isset($_POST['btModifierVTT'])) {
+        if (isset($_POST['btModifier'])) {
             $utilisateur = new Utilisateurppe1($db);
             $nom = $_POST['inputModifSurname'];
             $prenom = $_POST['inputModifName'];

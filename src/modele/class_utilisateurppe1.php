@@ -13,6 +13,7 @@ class Utilisateurppe1 {
     private $updateuniquementphoto;
     private $updateconnect;
     private $updaterecup;
+    private $updatemdp;
 
 //    private $selectByEmailPhoto;
 
@@ -24,12 +25,13 @@ class Utilisateurppe1 {
         $this->connect = $db->prepare("select email, idRole, mdp from utilisateurppe1 where email=:email");
         $this->select = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, numunique r.libelle as libellerole from utilisateurppe1 u, rolevttl r where u.idRole = r.id order by nom");
         $this->delete = $db->prepare("delete from utilisateurppe1 where utilisateurppe1.email=:email"); //requette ok
-        $this->selectByEmail = $db->prepare("select email, nom, prenom, idRole, dateinscription, photo from utilisateurppe1 where email=:email");
+        $this->selectByEmail = $db->prepare("select email, nom, prenom, idRole, dateinscription, photo, numrecup from utilisateurppe1 where email=:email");
         $this->update = $db->prepare("update utilisateurppe1 set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role, photo=:photo where email=:email");
         $this->updatesansphoto = $db->prepare("update utilisateurppe1 set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role where email=:email");
         $this->updateuniquementphoto = $db->prepare("update utilisateurppe1 set photo=:photo where email=:email");
         $this->updateconnect = $db->prepare("update utilisateurppe1 set datedernier=:datedernier where email=:email");
         $this->updaterecup = $db->prepare("update utilisateurppe1 set daterecup=:daterecup, numrecup=:numrecup where email=:email");
+        $this->updatemdp = $db->prepare("update utilisateurppe1 set mdp=:mdp where email=:email");
     }
 
     public function insert($email, $mdp, $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique) {
@@ -118,9 +120,19 @@ class Utilisateurppe1 {
 
     public function updaterecup($daterecup, $numrecup, $email) {
         $r = true;
-        $this->updaterecup->execute(array(':daterecup' => $daterecup, ':numrecup' => $numrecup, ':email' => $email,));
+        $this->updaterecup->execute(array(':daterecup' => $daterecup, ':numrecup' => $numrecup, ':email' => $email));
         if ($this->updaterecup->errorCode() != 0) {
             print_r($this->updaterecup->errorInfo());
+            $r = false;
+        }
+        return $r;
+    }
+
+    public function updatemdp($email, $mdp) {
+        $r = true;
+        $this->updatemdp->execute(array(':email' => $email, ':mdp' => $mdp));
+        if ($this->updatemdp->errorCode() != 0) {
+            print_r($this->updatemdp->errorInfo());
             $r = false;
         }
         return $r;
