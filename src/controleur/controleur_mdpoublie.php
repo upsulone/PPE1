@@ -100,7 +100,7 @@ a[x-apple-data-detectors] {
                       <td align="center" style="padding:0;Margin:0;"><a target="_blank" href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;"><img class="adapt-img" src="https://funeck.stripocdn.email/content/guids/CABINET_3c9063ad7d67414d03ae9474cb7b1773/images/25751579035521779.JPG" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="560"></a></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-                      <td style="padding:0;Margin:0;"><br><br><br><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica, sans-serif;line-height:21px;color:#333333;text-align:center;">Bonjour, pour récuperer votre mot de passe veuillez cliquer <a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=modifmotdepasse" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;">ici</a></p><br><br><br></td> 
+                      <td style="padding:0;Margin:0;"><br><br><br><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica, sans-serif;line-height:21px;color:#333333;text-align:center;">Bonjour, pour récuperer votre mot de passe veuillez cliquer <a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=modifmotdepasse&email='.$inputEmail.'&id='.$numrecup.'" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;">ici</a></p><br><br><br></td> 
                      </tr> 
                    </table></td> 
                  </tr> 
@@ -143,5 +143,13 @@ a[x-apple-data-detectors] {
 function actionCheckMail($twig, $db) {
     echo $twig->render('checkmail.html.twig', array());
 }
+
+function actionModifMotDePasse($twig, $db) {
+    $form = array();
+    $inputEmail = $_GET['email'];
+    $form['email'] = $inputEmail;    
+    echo $twig->render('modifmotdepasse.html.twig', array('form' => $form));
+}
+
 
 ?>
