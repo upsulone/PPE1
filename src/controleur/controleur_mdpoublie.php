@@ -2,6 +2,7 @@
 
 function actionMdpOublie($twig, $db) {
     $form = array();
+    $adresse='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
     if (isset($_POST['btOublie'])) {
         $inputEmail = $_POST['inputEmail'];
         $numrecup = uniqid();
@@ -97,10 +98,10 @@ a[x-apple-data-detectors] {
                   <td class="es-m-p0r" width="560" valign="top" align="center" style="padding:0;Margin:0;"> 
                    <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="center" style="padding:0;Margin:0;"><a target="_blank" href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;"><img class="adapt-img" src="https://funeck.stripocdn.email/content/guids/CABINET_3c9063ad7d67414d03ae9474cb7b1773/images/25751579035521779.JPG" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="560"></a></td> 
+                      <td align="center" style="padding:0;Margin:0;"><a target="_blank" href="'. $adresse .'" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;"><img class="adapt-img" src="https://funeck.stripocdn.email/content/guids/CABINET_3c9063ad7d67414d03ae9474cb7b1773/images/25751579035521779.JPG" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="560"></a></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-                      <td style="padding:0;Margin:0;"><br><br><br><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica, sans-serif;line-height:21px;color:#333333;text-align:center;">Bonjour, pour récuperer votre mot de passe veuillez cliquer <a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=modifmotdepasse&email=' . $inputEmail . '&id=' . $numrecup . '" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;">ici</a></p><br><br><br></td> 
+                      <td style="padding:0;Margin:0;"><br><br><br><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica, sans-serif;line-height:21px;color:#333333;text-align:center;">Bonjour, pour récuperer votre mot de passe veuillez cliquer <a href="'. $adresse .'?page=modifmotdepasse&email=' . $inputEmail . '&id=' . $numrecup . '" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#2CB543;">ici</a></p><br><br><br></td> 
                      </tr> 
                    </table></td> 
                  </tr> 
@@ -131,7 +132,6 @@ a[x-apple-data-detectors] {
         } else {
             $form['valide'] = false;
             $form['message'] = 'Utilisateur non inscrit sur le site PPE1';
-            var_dump($daterecup);
         }
         $form['email'] = $inputEmail;
         $form['daterecup'] = $daterecup;

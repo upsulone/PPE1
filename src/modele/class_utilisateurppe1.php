@@ -23,7 +23,7 @@ class Utilisateurppe1 {
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
         $this->insert = $db->prepare("insert into utilisateurppe1(email, mdp, idRole, nom, prenom, photo, dateinscription, datedernier, numunique) values (:email, :mdp, :role, :nom, :prenom, :photo, :dateinscription, :datedernier, :numunique)");
         $this->connect = $db->prepare("select email, idRole, mdp from utilisateurppe1 where email=:email");
-        $this->select = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, numunique r.libelle as libellerole from utilisateurppe1 u, rolevttl r where u.idRole = r.id order by nom");
+        $this->select = $db->prepare("select email, id, idRole, photo, nom, prenom, dateinscription, datedernier, numunique r.libelle as libellerole from utilisateurppe1 u, roleppe1 r where u.idRole = r.id order by nom");
         $this->delete = $db->prepare("delete from utilisateurppe1 where utilisateurppe1.email=:email"); //requette ok
         $this->selectByEmail = $db->prepare("select email, nom, prenom, idRole, dateinscription, photo, numrecup from utilisateurppe1 where email=:email");
         $this->update = $db->prepare("update utilisateurppe1 set nom=:nom, prenom=:prenom, mdp=:mdp, idRole=:role, photo=:photo where email=:email");

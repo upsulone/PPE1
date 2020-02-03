@@ -7,6 +7,7 @@ require_once 'controleur_contact.php';
 require_once 'controleur_compte.php';
 require_once 'controleur_photo.php';
 require_once 'controleur_mdpoublie.php';
+require_once 'controleur_languages.php';
 
 
 
