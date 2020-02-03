@@ -7,13 +7,15 @@ class Language {
     private $insert;
     private $selectByIdLang;
     private $update;
+    private $delete;
 
     public function __construct($db) {
         $this->db = $db;
         $this->insert = $db->prepare("insert into language (nom)values(:nom)");
         $this->select = $db->prepare("select id, nom from language order by nom");
-        $this->selectByIdLang = $db->prepare("select nom, id from language where id=:id");
+        $this->selectByIdLang = $db->prepare("select nom, id from language where id=:id order by nom");
         $this->update = $db->prepare("update language set nom=:nom where id=:id");
+        $this->delete = $db->prepare("delete from language where id=:id");
     }
 
     public function insert($inputLang) {
@@ -47,6 +49,16 @@ class Language {
         $this->update->execute(array(':id' => $id, ':nom' => $nom));
         if ($this->update->errorCode() != 0) {
             print_r($this->update->errorInfo());
+            $r = false;
+        }
+        return $r;
+    }
+
+    public function delete($id) {
+        $r = true;
+        $this->delete->execute(array(':id' => $id));
+        if ($this->delete->errorCode() != 0) {
+            print_r($this->delete->errorInfo());
             $r = false;
         }
         return $r;

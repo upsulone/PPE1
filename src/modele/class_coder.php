@@ -12,7 +12,7 @@ class Coder {
         $this->db = $db;
         $this->insert = $db->prepare("insert into coder (idLanguage, emailcoder) values (:idLanguage, :emailcoder)");
         $this->select = $db->prepare("select idLangage from coder");
-        $this->selectByEmail = $db->prepare("select c.idLanguage, l.nom as nom from coder c, language l where emailcoder=:emailcoder and c.idLanguage = l.id");
+        $this->selectByEmail = $db->prepare("select c.idLanguage, l.nom as nom from coder c, language l where emailcoder=:emailcoder and c.idLanguage = l.id order by nom");
         $this->delete = $db->prepare("delete from coder where coder.idLanguage = :id and coder.emailcoder = :emailcoder");
     }
 

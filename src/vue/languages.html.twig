@@ -34,7 +34,7 @@
                                 <table class="table table-hover table-striped">
                                     <tr><th style="text-align: center">Mes languages</th><th></th><th></th></tr>
                                             {% for ml in listeml %}
-                                        <tr><td>{{ml.nom}}</td><td><div class="btn-group btn-group-lg"><a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=languages&id={{ml.idLanguage}}"><span class="glyphicon glyphicon-trash" ariahidden="true"></span></a></div></td></span><td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{l.id}}"/></td></tr>
+                                        <tr><td>{{ml.nom}}</td><td><div class="btn-group btn-group-lg"><a href="http://serveur1.arras-sio.com/symfony4-4059/PPE1/web/index.php?page=languages&id={{ml.idLanguage}}"><span class="glyphicon glyphicon-trash" ariahidden="true"></span></a></div></td><td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{l.id}}"/></td></tr>
                                                 {% endfor %}
                                 </table>
                             </div>

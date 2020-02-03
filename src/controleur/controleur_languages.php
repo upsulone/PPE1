@@ -4,8 +4,10 @@
 //    echo $twig->render('languages.html.twig', array());
 //}
 
-function actionAjoutLanguages($twig, $db) {
+function actionAdminLanguages($twig, $db) {
     $form = array();
+    $lang = new Language($db);
+    
     if (isset($_POST['btLang'])) {
         $inputLang = $_POST['inputLang'];
         $form['valide'] = true;
@@ -17,7 +19,19 @@ function actionAjoutLanguages($twig, $db) {
         } else
             $form['message'] = 'Insertion dans la table type validée';
     }
-    $lang = new Language($db);
+    
+    if (isset($_GET['id'])) {
+        $exec = $lang->delete($_GET['id']);
+        if (!$exec) {
+            $form['valide'] = false;
+            $form['message'] = 'Problème de suppression dans la table coder';
+        } else {
+            $form['valide'] = true;
+            $form['message'] = 'Language supprimé avec succès';
+        }
+    }
+    
+    
     $liste = $lang->select();
     echo $twig->render('ajoutlanguages.html.twig', array('form' => $form, 'liste' => $liste));
 }
@@ -34,7 +48,7 @@ function actionLanguages($twig, $db) {
             $exec = $coder->insert($idLanguage, $emailcoder);
             if (!$exec) {
                 $form['valide'] = false;
-                $form['message'] = 'Problème de suppression dans la table coder';
+                $form['message'] = 'Problème d\'ajout dans la table coder';
             }
         }
     }
