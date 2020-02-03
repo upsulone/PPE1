@@ -44,9 +44,9 @@ class Language {
         return $this->selectByIdLang->fetch();
     }
 
-    public function update($id, $nom) {
+    public function update($nom, $id) {
         $r = true;
-        $this->update->execute(array(':id' => $id, ':nom' => $nom));
+        $this->update->execute(array(':nom' => $nom, ':id' => $id));
         if ($this->update->errorCode() != 0) {
             print_r($this->update->errorInfo());
             $r = false;

@@ -14,6 +14,7 @@ class Utilisateurppe1 {
     private $updateconnect;
     private $updaterecup;
     private $updatemdp;
+    private $connexion;
 
 //    private $selectByEmailPhoto;
 
@@ -32,6 +33,7 @@ class Utilisateurppe1 {
         $this->updateconnect = $db->prepare("update utilisateurppe1 set datedernier=:datedernier where email=:email");
         $this->updaterecup = $db->prepare("update utilisateurppe1 set daterecup=:daterecup, numrecup=:numrecup where email=:email");
         $this->updatemdp = $db->prepare("update utilisateurppe1 set mdp=:mdp where email=:email");
+        $this->connexion = $db->prepare("insert into connexions(emailco, dateco, deco) values (:emailco, :dateco, :deco)");
     }
 
     public function insert($email, $mdp, $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique) {
@@ -133,6 +135,16 @@ class Utilisateurppe1 {
         $this->updatemdp->execute(array(':email' => $email, ':mdp' => $mdp));
         if ($this->updatemdp->errorCode() != 0) {
             print_r($this->updatemdp->errorInfo());
+            $r = false;
+        }
+        return $r;
+    }
+
+    public function connexion($inputEmail, $dateco) {
+        $r = true;
+        $this->connexion->execute(array(':emailco' => $inputEmail, ':dateco' => $dateco));  //on exécute les requètes préparés dans le prepare et on affecte les valeurs SQL aux valeurs du formulaire. ATTENTION à l'ordre et à la position !!
+        if ($this->connexion->errorCode() != 0) {
+            print_r($this->connexion->errorInfo());
             $r = false;
         }
         return $r;

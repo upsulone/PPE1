@@ -56,7 +56,6 @@ function actionLanguages($twig, $db) {
 // CE QUE JE RAJOUTE
     
     if (isset($_POST['btSuppListe'])) {
-        echo 'Test btn';
         $cocher = $_POST['cocher'];
         $emailcoder = $_SESSION['login'];
         foreach ($cocher as $idLanguage) {
@@ -109,8 +108,45 @@ function actionLanguages($twig, $db) {
             $t[] = $v;
         }
     }
-
+  
     echo $twig->render('languages.html.twig', array('form' => $form, 'listeld' => $t, 'listeml' => $listeml));
+}
+
+
+function actionModifLanguages($twig, $db) {
+    $form = array();
+       
+    if (isset($_GET['id'])) {
+        $lang = new Language($db);
+        $unLang = $lang->selectByIdLang($_GET['id']);
+        if ($unLang != null) {
+            $form['langage'] = $unLang;
+            
+        } else {
+            $form['message'] = 'Langage incorrect';
+        }
+        
+    } else {
+        if (isset($_POST['btModifLang'])) {
+            $lang = new Language($db);
+            $unLang = $lang->selectByIdLang($_POST['idlangage']);
+            $nom = $_POST['inputModifLang'];
+            $id = $_POST['idlangage'];
+            $form['idlangage'] = $unLang;
+            $exec = $lang->update($nom, $id);
+            if (!$exec) {
+                $form['valide'] = false;
+                $form['message'] = 'Échec de la modification';
+            } else {
+                $form['valide'] = true;
+                $form['message'] = 'Modification réussie';
+            }
+        } else {
+            $form['message'] = 'Langage non précisé';
+        }
+    }
+    
+    echo $twig->render('modiflanguages.html.twig', array('form' => $form));
 }
 
 ?>

@@ -2,18 +2,21 @@
 
 function actionCompte($twig, $db) {
     $form = array();
+    $coder = new Coder($db);
+    $listeml = $coder->selectByEmail($_SESSION['login']);
     if (isset($_GET['email'])) {
         $utilisateur = new Utilisateurppe1($db);
         $unUtilisateur = $utilisateur->selectByEmail($_GET['email']);
         if ($unUtilisateur != null) {
             $form['utilisateur'] = $unUtilisateur;
+            $form['langages'] = $listeml;
         } else {
             $form['message'] = 'Utilisateur incorrect';
         }
     } else {
         $form['message'] = 'Utilisateur non précisé';
     }
-    echo $twig->render('compte.html.twig', array('form' => $form));
+    echo $twig->render('compte.html.twig', array('form' => $form, 'listeml' => $listeml));
 }
 
 function actionModifCompte($twig, $db) {

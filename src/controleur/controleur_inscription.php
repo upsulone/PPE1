@@ -11,6 +11,7 @@ function actionInscrire($twig, $db) {
         $prenom = $_POST['inputName'];
         $role = $_POST['role'];
         $photo = NULL;
+        date_default_timezone_set('Europe/Paris');
         $dateinscription = date("Y-m-d"); //Ici le format n'est pas important dans le sens ou on ne le voit pas, et on l'affiche dans le profil en tant que date au bon format.
         $datedernier = date("Y-m-d"); 
         $numunique= uniqid();

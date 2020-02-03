@@ -17,6 +17,7 @@ function getPage($db) {
     $lesPages['modifmotdepasse'] = "actionModifMotDePasse;0";
     $lesPages['ajoutlanguages'] = "actionAdminLanguages;1";
     $lesPages['languages'] = "actionLanguages;0";
+    $lesPages['modiflanguages'] = "actionModifLanguages;1";
     
     
 
