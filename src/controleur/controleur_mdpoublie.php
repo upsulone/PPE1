@@ -122,7 +122,7 @@ a[x-apple-data-detectors] {
                 $headers[] = 'Content-type: text/html; charset=UTF-8';
 
                 // En-têtes additionnels
-                $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
+//                $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
                 $headers[] = 'From: PPE <recuperation@ppe.com>';
 
                 // Envoi
