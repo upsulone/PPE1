@@ -18,6 +18,8 @@ function getPage($db) {
     $lesPages['ajoutlanguages'] = "actionAdminLanguages;1";
     $lesPages['languages'] = "actionLanguages;0";
     $lesPages['modiflanguages'] = "actionModifLanguages;1";
+    $lesPages['logsadmin'] = "actionLogsAdmin;1";
+    $lesPages['logsdev'] = "actionLogsDev;0";
     
     
 

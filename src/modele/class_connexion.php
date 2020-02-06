@@ -4,16 +4,21 @@ class Connexion {
 
     private $db;    // déclaration de la variable en privé (uniquement pour la classe) // $db c'est la variable de connection
     private $connexion;
-
-//    private $selectByEmailPhoto;
-
-
-
+    private $select;
+    private $selectLimit;
+    private $selectLimitEmail;
+    private $selectCount;
+    private $selectCountEmail;
+    
     public function __construct($db) {
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
         $this->connexion = $db->prepare("insert into connexions(emailco, dateco) values (:emailco, :dateco)");
+        $this->select = $db->prepare("select idco, dateco, emailco from connexions order by dateco desc");
+        $this->selectLimit = $db->prepare("select idco, dateco, emailco from connexions order by dateco desc limit :inf,:limite");
+        $this->selectLimitEmail = $db->prepare("select emailco, dateco, idco from connexions where emailco= :emailco order by dateco desc limit :inf,:limite");
+        $this->selectCount = $db->prepare("select count(*) as nb from connexions");
+        $this->selectCountEmail = $db->prepare("select count(*) as nb from connexions where emailco=:emailco");
     }
-
 
     public function connexion($inputEmail, $dateco) {
         $r = true;
@@ -23,6 +28,51 @@ class Connexion {
             $r = false;
         }
         return $r;
+    }
+
+    public function select() {
+        $liste = $this->select->execute();
+        if ($this->select->errorCode() != 0) {
+            print_r($this->select->errorInfo());
+        }
+        return $this->select->fetchAll();
+    }
+
+    public function selectLimit($inf, $limite) {
+        $this->selectLimit->bindParam(':inf', $inf, PDO::PARAM_INT);
+        $this->selectLimit->bindParam(':limite', $limite, PDO::PARAM_INT);
+        $this->selectLimit->execute();
+        if ($this->selectLimit->errorCode() != 0) {
+            print_r($this->selectLimit->errorInfo());
+        }
+        return $this->selectLimit->fetchAll();
+    }
+
+    public function selectLimitEmail($inf, $limite, $emailco) {
+        $this->selectLimitEmail->execute(array(':inf' => $inf, ':limite' => $limite, ':emailco' => $emailco));
+        $this->selectLimitEmail->bindParam(':inf', $inf, PDO::PARAM_INT);
+        $this->selectLimitEmail->bindParam(':limite', $limite, PDO::PARAM_INT);
+        $this->selectLimitEmail->execute();
+        if ($this->selectLimitEmail->errorCode() != 0) {
+            print_r($this->selectLimitEmail->errorInfo());
+        }
+        return $this->selectLimitEmail->fetchAll();
+    }
+
+    public function selectCount() {
+        $this->selectCount->execute();
+        if ($this->selectCount->errorCode() != 0) {
+            print_r($this->selectCount->errorInfo());
+        }
+        return $this->selectCount->fetch();
+    }
+
+    public function selectCountEmail($emailco) {
+        $this->selectCountEmail->execute(array(':emailco' => $emailco));
+        if ($this->selectCountEmail->errorCode() != 0) {
+            print_r($this->selectCountEmail->errorInfo());
+        }
+        return $this->selectCountEmail->fetch();
     }
 
 }
