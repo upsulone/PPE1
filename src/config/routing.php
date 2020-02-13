@@ -20,6 +20,7 @@ function getPage($db) {
     $lesPages['modiflanguages'] = "actionModifLanguages;1";
     $lesPages['logsadmin'] = "actionLogsAdmin;1";
     $lesPages['logsdev'] = "actionLogsDev;0";
+    $lesPages['stats'] = "actionStats;1";
     
     
 

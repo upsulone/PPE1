@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Statistiques {% endblock %}
+
+{% block contenu %}
+
+    <div class="wrapper" style="text-align: center"> 
+        <div class="row">
+            <br/><br/>
+            <div class="col-lg-6 col-sm-12">
+                <h1 style="color: #2056ac">Membres les plus actifs :</h1>
+                <br/>
+                <img width=600 src="data:image/png;base64, {{ graph2 }}" alt="" />
+
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <h1 style="color: #2056ac">Connexions par mois (2020) :</h1>
+                <br/>
+                <img width=600 src="data:image/png;base64, {{ graph }}" alt="" />
+                
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <br/><br/><br/>
+
+{% endblock %}    
