@@ -2,8 +2,29 @@
 
 class Graphique {
 
+    private $selectCountCo;
+    private $selectJusteCo;
+
     public function __construct($db) {
         $this->db = $db;
+        $this->selectCountCo = $db->prepare("SELECT t1.email, (SELECT COUNT(*) FROM connexions t2 WHERE t2.emailco = t1.email) as nombredeco FROM utilisateurppe1 t1 ORDER by nombredeco desc");
+        $this->selectJusteCo = $db->prepare("SELECT emailco, count(*) as nombredeco FROM connexions GROUP BY emailco");
+    }
+
+    public function selectCountCo() {
+        $liste = $this->selectCountCo->execute();
+        if ($this->selectCountCo->errorCode() != 0) {
+            print_r($this->selectCountCo->errorInfo());
+        }
+        return $this->selectCountCo->fetchAll();
+    }
+
+    public function selectJusteCo() {
+        $liste2 = $this->selectJusteCo->execute();
+        if ($this->selectJusteCo->errorCode() != 0) {
+            print_r($this->selectJusteCo->errorInfo());
+        }
+        return $this->selectJusteCo->fetchAll();
     }
 
     public function top($dataly, $type) {
@@ -35,10 +56,10 @@ class Graphique {
 
     public function Barres($data1y) {
 
-        $graph = new Graph(1000, 800, 'auto');
+        $graph = new Graph(800, 600, 'auto');
         $graph->SetScale("textlin");
 
-        $theme_class = new UniversalTheme;
+        $theme_class = new UniversalTheme();
         $graph->SetTheme($theme_class);
 
         $graph->SetBox(false);
@@ -51,7 +72,6 @@ class Graphique {
 
         $gbplot = new GroupBarPlot(array($b1plot));
 
-
         $graph->Add($gbplot);
 
         $b1plot->SetColor("white");
@@ -62,19 +82,15 @@ class Graphique {
 
     public function Pie($data) {
 
-        $graph = new PieGraph(1000, 800);
+        $graph = new PieGraph(800, 600);
 
         $graph->SetFrame(false);
 
-
-        $theme_class = new VividTheme;
+        $theme_class = new VividTheme();
         $graph->SetTheme($theme_class);
-
 
         $p1 = new PiePlot3D($data);
         $graph->Add($p1);
-
-
 
         $p1->ShowBorder();
         $p1->SetColor('black');

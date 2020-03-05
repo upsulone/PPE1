@@ -9,15 +9,35 @@
             <br/><br/>
             <div class="col-lg-6 col-sm-12">
                 <h1 style="color: #2056ac">Membres les plus actifs :</h1>
-                <br/>
+                <nav aria-label="navigation">
+                    <ul class="pager">
+                        <li><a href="#" title="Précédent">Précédent</a>     </li>
+                        <li><a href="#" title="Suivant">Suivant</a></li>
+                    </ul>
+                </nav>
                 <img width=600 src="data:image/png;base64, {{ graph2 }}" alt="" />
+                <!--<div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <tr><th style="text-align: center">Email :</th><th style="text-align: center">Nombre de connexions :</th></tr>
+                                {% for c in liste %}
+                            <tr><td style="text-align: center">{{c.email}}</td><td style="text-align: center">{{c.nombredeco}}</td></tr>
+                                {% endfor %}
+                    </table>
 
+                </div>-->
             </div>
+
             <div class="col-lg-6 col-sm-12">
-                <h1 style="color: #2056ac">Connexions par mois (2020) :</h1>
-                <br/>
+
+                <h1 style="color: #2056ac">Connexions des développeurs :</h1>
+                <nav aria-label="navigation">
+                    <ul class="pager">
+                        <li><a href="#" title="Précédent">Précédent</a>     </li>
+                        <li><a href="#" title="Suivant">Suivant</a></li>
+                    </ul>
+                </nav>
                 <img width=600 src="data:image/png;base64, {{ graph }}" alt="" />
-                
+
             </div>
 
 
@@ -27,5 +47,7 @@
 
 
     <br/><br/><br/>
+
+
 
 {% endblock %}    

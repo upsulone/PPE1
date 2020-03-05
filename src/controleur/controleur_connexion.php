@@ -2,7 +2,7 @@
 
 function actionConnexion($twig, $db) {
     $form = array();
-    if (isset($_POST['btConnecter'])) {
+    if (isset($_POST['btConnecter'])) { 
         $form['valide'] = true;
         $inputEmail = $_POST['inputEmail'];
         $inputPassword = $_POST['inputPassword'];
@@ -21,7 +21,6 @@ function actionConnexion($twig, $db) {
                 $dateco = date("Y-m-d H:i:s");
                 $unUtilisateur = $utilisateur->updateconnect($inputEmail, $datedernier);
                 $connexion->connexion($inputEmail, $dateco);
-                
                 header("Location:index.php");
             }
         } else {
