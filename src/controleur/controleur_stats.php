@@ -11,8 +11,8 @@ function actionStats($twig, $db) {
     $r = $graph->top($data, 'barres');
 
     $data = array(30, 60, 10);
-    var_dump($data);
-    var_dump($liste2);
+//    var_dump($data);
+//    var_dump($liste2);
     $r2 = $graph->top($data, 'pie');
 
 //    $liste = $graph->selectCountCo();
