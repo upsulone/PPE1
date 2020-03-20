@@ -9,7 +9,10 @@ class Connexion {
     private $selectLimitEmail;
     private $selectCount;
     private $selectCountEmail;
-    
+    private $selectAnnee;
+    private $selectMois;
+    private $selectJour;
+
     public function __construct($db) {
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
         $this->connexion = $db->prepare("insert into connexions(emailco, dateco) values (:emailco, :dateco)");
@@ -18,6 +21,9 @@ class Connexion {
         $this->selectLimitEmail = $db->prepare("select emailco, dateco, idco from connexions where emailco= :emailco order by dateco desc limit :inf,:limite");
         $this->selectCount = $db->prepare("select count(*) as nb from connexions");
         $this->selectCountEmail = $db->prepare("select count(*) as nb from connexions where emailco=:emailco");
+        $this->selectAnnee = $db->prepare("SELECT MONTH(dateco) as Mois, COUNT(*) as NombreDeCoParMois FROM connexions WHERE dateco BETWEEN :datedebutannee AND :datefinannee GROUP BY MONTH(dateco)");
+        $this->selectMois = $db->prepare("SELECT DAY(dateco) as Jours, COUNT(*) as NombreDeCoParJours FROM connexions WHERE dateco BETWEEN :datedebutmois AND :datefinmois GROUP BY DAY(dateco)");
+        $this->selectJour = $db->prepare("SELECT HOUR(dateco) as Heures, COUNT(*) as NombreDeCoParHeure FROM connexions WHERE dateco BETWEEN :datedebutjour AND :datefinjour GROUP BY HOUR(dateco)");
     }
 
     public function connexion($inputEmail, $dateco) {
@@ -73,6 +79,30 @@ class Connexion {
             print_r($this->selectCountEmail->errorInfo());
         }
         return $this->selectCountEmail->fetch();
+    }
+
+    public function selectAnnee($datedebutannee, $datefinannee) {
+        $this->selectAnnee->execute(array(':datedebutannee' => $datedebutannee, ':datefinannee' => $datefinannee));
+        if ($this->selectAnnee->errorCode() != 0) {
+            print_r($this->selectAnnee->errorInfo());
+        }
+        return $this->selectAnnee->fetchAll();
+    }
+
+    public function selectMois($datedebutmois, $datefinmois) {
+        $this->selectMois->execute(array(':datedebutmois' => $datedebutmois, ':datefinmois' => $datefinmois));
+        if ($this->selectMois->errorCode() != 0) {
+            print_r($this->selectMois->errorInfo());
+        }
+        return $this->selectMois->fetchAll();
+    }
+
+    public function selectJour($datedebutjour, $datefinjour) {
+        $this->selectJour->execute(array(':datedebutjour' => $datedebutjour, ':datefinjour' => $datefinjour));
+        if ($this->selectJour->errorCode() != 0) {
+            print_r($this->selectJour->errorInfo());
+        }
+        return $this->selectJour->fetchAll();
     }
 
 }

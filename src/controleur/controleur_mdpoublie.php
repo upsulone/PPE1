@@ -13,7 +13,7 @@ function actionMdpOublie($twig, $db) {
         if ($unUtilisateur != null) {
             if ($unUtilisateur == null) {
                 $form['valide'] = false;
-                $form['message'] = 'Test1';
+                $form['message'] = 'Utilisateur non valide';
             } else {
                 header("Location:index.php?page=checkmail&email=$inputEmail");
                 ini_set('display_errors', 1);
@@ -283,6 +283,8 @@ a[x-apple-data-detectors] {
 
 function actionModifMotDePasse($twig, $db) {
     $form = array();
+    
+    
     if (isset($_GET['email'])) {
         $inputEmail = $_GET['email'];
         $inputId = $_GET['id'];
@@ -290,6 +292,7 @@ function actionModifMotDePasse($twig, $db) {
         $form['id'] = $inputId;
         $utilisateur = new Utilisateurppe1($db);
         $unUtilisateur = $utilisateur->selectByEmail($_GET['email']);
+        
         if ($unUtilisateur != null) {
             $form['utilisateur'] = $unUtilisateur;
             if (isset($_GET['id'])) {

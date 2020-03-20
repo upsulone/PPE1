@@ -48,7 +48,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="index.php?page=ajoutlanguages">Ajout Languages</a></li>
                                             <li><a class="dropdown-item" href="index.php?page=logsadmin">Connexions des utilisateurs</a></li>
-                                            <li><a class="dropdown-item" href="index.php?page=stats">Statistiques</a></li>
+                                            <li><a class="dropdown-item" href="index.php?page=stats&annee={{ "now"|date("Y") }}&mois={{ "now"|date("m") }}&jour={{ "now"|date("j") }}">Statistiques</a></li>
                                         </ul>
                                     </li>
                                 {% endif %}
@@ -90,5 +90,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/jquery-3.2.1.min.js"><\/script>')</script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>

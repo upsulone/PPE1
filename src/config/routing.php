@@ -21,8 +21,10 @@ function getPage($db) {
     $lesPages['logsadmin'] = "actionLogsAdmin;1";
     $lesPages['logsdev'] = "actionLogsDev;0";
     $lesPages['stats'] = "actionStats;1";
-    
-    
+    $lesPages['checkcompte'] = "actionCheckCompte;0";
+    $lesPages['validecompte'] = "actionValideCompte;0";
+
+
 
     if ($db != null) {
         if (isset($_GET['page'])) {
