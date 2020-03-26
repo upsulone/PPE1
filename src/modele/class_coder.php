@@ -7,6 +7,7 @@ class Coder {
     private $insert;
     private $selectByEmail;
     private $delete;
+    private $rechercher;
 
     public function __construct($db) {
         $this->db = $db;
@@ -14,6 +15,7 @@ class Coder {
         $this->select = $db->prepare("select idLangage from coder");
         $this->selectByEmail = $db->prepare("select c.idLanguage, l.nom as nom from coder c, language l where emailcoder=:emailcoder and c.idLanguage = l.id order by nom");
         $this->delete = $db->prepare("delete from coder where coder.idLanguage = :id and coder.emailcoder = :emailcoder");
+        $this->rechercher = $db->prepare("select language.nom as nomdulanguage, utilisateurppe1.nom, utilisateurppe1.prenom, utilisateurppe1.email from coder, language, utilisateurppe1 where coder.idLanguage = language.id and utilisateurppe1.email=coder.emailcoder and language.nom like :recherche");
     }
 
     public function insert($idLanguage, $emailcoder) {
@@ -50,6 +52,14 @@ class Coder {
             $r = false;
         }
         return $r;
+    }
+
+    public function rechercher($recherche) {
+        $listerecherche = $this->rechercher->execute(array(':recherche' => '%' . $recherche . '%'));
+        if ($this->rechercher->errorCode() != 0) {
+            print_r($this->rechercher->errorInfo());
+        }
+        return $this->rechercher->fetchAll();
     }
 
 }

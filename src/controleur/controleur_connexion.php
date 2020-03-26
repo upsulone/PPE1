@@ -2,6 +2,7 @@
 
 function actionConnexion($twig, $db) {
     $form = array();
+    
     if (isset($_POST['btConnecter'])) {
         $form['valide'] = true;
         $inputEmail = $_POST['inputEmail'];

@@ -23,7 +23,7 @@ function getPage($db) {
     $lesPages['stats'] = "actionStats;1";
     $lesPages['checkcompte'] = "actionCheckCompte;0";
     $lesPages['validecompte'] = "actionValideCompte;0";
-
+    $lesPages['recherche'] = "actionRecherche;0";
 
 
     if ($db != null) {
