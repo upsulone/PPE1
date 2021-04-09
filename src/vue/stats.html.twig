@@ -1,44 +1,32 @@
 {% extends "base.html.twig" %}
-{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block style %}
+    <link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
 {% block title %} {{ parent() }} Statistiques {% endblock %}
 
 {% block contenu %}
 
-    <div class="wrapper" style="text-align: center"> 
+    <div class="wrapper" style="text-align: center">
         <div class="row">
             <br/><br/>
 
             <h1 style="color: #2056ac">Connexions des développeurs :</h1>
-            <nav aria-label="navigation"> Recliquez après chaque changement.<br/> Afficher un graphique par : 
+            <nav aria-label="navigation"> Recliquez après chaque changement.<br/> Afficher un graphique par :
                 <ul class="pager">
-                    <li id="btannee"><a title="Annee" >Année</a>     </li>
-                    <li id="btmois"><a title="Mois" >Mois</a>     </li>
-                    <li id="btjour"><a title="Jour" >Jour</a></li>
+                    <li id="btannee"><a title="Annee">Année</a>     </li>
+                    <li id="btmois"><a title="Mois">Mois</a>     </li>
+                    <li id="btjour"><a title="Jour">Jour</a></li>
                 </ul>
             </nav>
-
-
-
         </div>
 
-
-
-
-
         <div class="row">
-
-
-
             <div class="col-lg-4 col-sm-12">
                 <form class="form-signin" action="index.php?page=stats" method="post"
                       enctype="application/x-www-form-urlencoded">
-
-
                     <!-- DÉBUT DE Pour changer l'ANNEE :  -->
-
-
                     <div class="form-group" id="divselectannee"> <!-- Pour changer l'année de l'ANNEE -->
-                        <h3 id="afficherannee" style="color: #2056ac">Le graphique représente l'année {{ form.afficherannee }}</h3>
+                        <h3 id="afficherannee" style="color: #2056ac">Le graphique représente
+                            l'année {{ form.afficherannee }}</h3>
                         <select class="form-control" id="selectannee">
                             <option value="" disabled="disabled" selected>Cliquez pour changer d'année</option>
                             {% for i in 2020..2022 %}
@@ -50,12 +38,10 @@
 
                     <!-- FIN DE Pour changer l'ANNEE -->
 
-
                     <!-- DÉBUT DE Pour changer le MOIS :  -->
-
-
                     <div class="form-group" id="divselectannee2"> <!-- Pour changer l'année du MOIS -->
-                        <h3 id="affichermois" style="color: #2056ac">Le graphique représente le {{ form.affichermois }}e mois de l'an {{ form.afficherannee }} </h3>
+                        <h3 id="affichermois" style="color: #2056ac">Le graphique représente le {{ form.affichermois }}e
+                            mois de l'an {{ form.afficherannee }} </h3>
                         <select class="form-control" id="selectannee2">
                             <option value="" disabled="disabled" selected>Changez l'année en premier</option>
                             {% for i in 2020..2022 %}
@@ -65,8 +51,6 @@
                         <div></div>
                     </div>
 
-
-
                     <div class="form-group" id="divselectmois"> <!-- Pour changer le mois du MOIS -->
                         <select class="form-control" id="selectmois">
                             <option value="" disabled="disabled" selected>Changez le mois ensuite</option>
@@ -75,16 +59,13 @@
                             {% endfor %}
                         </select>
                     </div>
-
-
                     <!-- FIN DE Pour changer le MOIS -->
-
 
                     <!-- DÉBUT DE Pour changer le JOUR : -->
 
-
                     <div class="form-group" id="divselectannee3"> <!-- Pour changer l'année du JOUR -->
-                        <h3 id="afficherjour" style="color: #2056ac">Le graphique représente le {{ form.afficherjour }}e jour du {{ form.affichermois }}e mois de l'an {{ form.afficherannee }} </h3>
+                        <h3 id="afficherjour" style="color: #2056ac">Le graphique représente le {{ form.afficherjour }}e
+                            jour du {{ form.affichermois }}e mois de l'an {{ form.afficherannee }} </h3>
                         <select class="form-control" id="selectannee3">
                             <option value="" disabled="disabled" selected>Changez l'année en premier</option>
                             {% for i in 2020..2022 %}
@@ -115,19 +96,16 @@
                 </form>
             </div>
 
-
             <!-- FIN DE Pour changer le JOUR -->
 
-
             <!-- DÉBUT DE L'Affichage des graphiques : -->
-
 
             <!-- Graphique pour les années (voir les statistiques par mois de l'année X) -->
             <div style="overflow-x:auto;">
                 <div class="col-lg-8 col-sm-12">
 
                     <div class="form-group" id="graph">
-                        <img width=600 src="data:image/png;base64, {{ graph }}" alt="" />
+                        <img width=600 src="data:image/png;base64, {{ graph }}" alt=""/>
                     </div>
 
                 </div>
@@ -138,7 +116,7 @@
                 <div class="col-lg-8 col-sm-12">
 
                     <div class="form-group" id="graph2">
-                        <img width=600 src="data:image/png;base64, {{ graph2 }}" alt="" />
+                        <img width=600 src="data:image/png;base64, {{ graph2 }}" alt=""/>
                     </div>
 
                 </div>
@@ -149,7 +127,7 @@
                 <div class="col-lg-8 col-sm-12">
 
                     <div class="form-group" id="graph3">
-                        <img width=600 src="data:image/png;base64, {{ graph3 }}" alt="" />
+                        <img width=600 src="data:image/png;base64, {{ graph3 }}" alt=""/>
                     </div>
 
                 </div>
@@ -157,14 +135,9 @@
 
             <!-- FIN DE L'Affichage des graphiques -->
 
-
         </div>
     </div>
 
-
-
     <br/><br/><br/>
-
-
 
 {% endblock %}    

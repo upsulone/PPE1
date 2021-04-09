@@ -16,8 +16,6 @@ function actionStats($twig, $db) {
     $afficherjour = $_GET['jour']; //Pour l'affichage des jours
     $form['afficherjour'] = $afficherjour;
 
-
-
     $datedebutannee = $_GET['annee'] . '-01-01 00:00:00';
     $datefinannee = $_GET['annee'] . '-12-31 23:59:59';
 

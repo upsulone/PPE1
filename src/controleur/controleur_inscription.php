@@ -18,9 +18,7 @@ function actionInscrire($twig, $db) {
         $dateinscription = date("Y-m-d"); //Ici le format n'est pas important dans le sens ou on ne le voit pas, et on l'affiche dans le profil en tant que date au bon format.
         $datedernier = date("Y-m-d");
 
-
         $numunique = uniqid();
-
 
         if (isset($_FILES['photo'])) {
             if (!empty($_FILES['photo']['name'])) {
@@ -48,9 +46,7 @@ AAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
             }
         }
 
-
         $form['valide'] = true;
-
 
         if ($inputPassword != $inputPassword2) {
             $form['valide'] = false;
@@ -63,10 +59,7 @@ AAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
             }
 
 
-
             // DEBUT DE LA COPIE POUR MAIL
-
-
 
             $unUtilisateur = $utilisateur->selectByEmail($_POST['inputEmail']);
             if ($unUtilisateur == null) {
@@ -74,6 +67,9 @@ AAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
                     $form['valide'] = false;
                     $form['message'] = 'Utilisateur déja inscrit sur le site PPE';
                 } else {
+                    $exec = $utilisateur->insert($inputEmail, password_hash($inputPassword,
+                        PASSWORD_DEFAULT), $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique);
+
                     header("Location:index.php?page=checkcompte&email=$inputEmail");
                     ini_set('display_errors', 1);
                     error_reporting(E_ALL);
@@ -187,7 +183,6 @@ a[x-apple-data-detectors] {
                     // Envoi
                     mail($to, $subject, $message, implode("\r\n", $headers));
 
-
 //                    $exec = $utilisateur->updaterecup($datevalide, $numvalide, $inputEmail);
                 }
             } else {
@@ -201,25 +196,11 @@ a[x-apple-data-detectors] {
 
 
 
-
-
-
-
-
-
-            $exec = $utilisateur->insert($inputEmail, password_hash($inputPassword,
-                            PASSWORD_DEFAULT), $role, $nom, $prenom, $photo, $dateinscription, $datedernier, $numunique);
-
             if (!$exec) {
                 $form['valide'] = false;
                 $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
             }
         }
-
-
-
-
-
 
         $form['email'] = $inputEmail;
         $form['role'] = $role;
@@ -362,7 +343,6 @@ a[x-apple-data-detectors] {
 
                 $exec = $utilisateur->updatevalide($numunique, $inputEmail);
 
-
 //                    $exec = $utilisateur->updaterecup($datevalide, $numvalide, $inputEmail);
             }
         } else {
@@ -378,8 +358,6 @@ a[x-apple-data-detectors] {
 
 function actionValideCompte($twig, $db) {
     $form = array();
-
-
 
     if (isset($_GET['email'])) {
         $inputEmail = $_GET['email'];
@@ -407,12 +385,10 @@ function actionValideCompte($twig, $db) {
         $email = $_POST['inputEmail'];
         $utilisateur = new Utilisateurppe1($db);
 
-
         date_default_timezone_set('Europe/Paris');
         $datevalide = date("Y-m-d-H:i:s"); //$datevalide = date("d-m-Y-H:i:s");
 
         $valide = 1;
-
 
         $exec = $utilisateur->updatevalidecompte($datevalide, $email, $valide);
         if (!$exec) {

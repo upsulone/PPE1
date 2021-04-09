@@ -20,8 +20,6 @@ class Utilisateurppe1 {
 
 //    private $selectByEmailPhoto;
 
-
-
     public function __construct($db) {
         $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
         $this->insert = $db->prepare("insert into utilisateurppe1(email, mdp, idRole, nom, prenom, photo, dateinscription, datedernier, numunique) values (:email, :mdp, :role, :nom, :prenom, :photo, :dateinscription, :datedernier, :numunique)");

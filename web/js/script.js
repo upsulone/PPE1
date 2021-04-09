@@ -1,6 +1,5 @@
 //SCRIPT POUR LES STATISTIQUES : 
 
-
 $(document).ready(function () {
 
     // On cache tout pour commencer : 
