@@ -8,6 +8,7 @@ class Coder {
     private $selectByEmail;
     private $delete;
     private $rechercher;
+    private $selectCountByUser;
 
     public function __construct($db) {
         $this->db = $db;
@@ -16,6 +17,7 @@ class Coder {
         $this->selectByEmail = $db->prepare("select c.idLanguage, l.nom as nom from coder c, language l where emailcoder=:emailcoder and c.idLanguage = l.id order by nom");
         $this->delete = $db->prepare("delete from coder where coder.idLanguage = :id and coder.emailcoder = :emailcoder");
         $this->rechercher = $db->prepare("select language.nom as nomdulanguage, utilisateurppe1.nom, utilisateurppe1.prenom, utilisateurppe1.email from coder, language, utilisateurppe1 where coder.idLanguage = language.id and utilisateurppe1.email=coder.emailcoder and language.nom like :recherche");
+        $this->selectCountByUser = $db->prepare("SELECT emailcoder as utilisateurs, COUNT(*) as nbLangMaitrise FROM `coder` GROUP BY `emailcoder`");
     }
 
     public function insert($idLanguage, $emailcoder) {
@@ -26,6 +28,15 @@ class Coder {
             $r = false;
         }
         return $r;
+    }
+
+    public function selectCountByUser()
+    {
+        $this->selectCountByUser->execute();
+        if ($this->selectCountByUser->errorCode() != 0) {
+            print_r($this->selectCountByUser->errorInfo());
+        }
+        return $this->selectCountByUser->fetchAll();
     }
 
     public function select() {

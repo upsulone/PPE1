@@ -11,6 +11,8 @@ require_once 'controleur_languages.php';
 require_once 'controleur_logs.php';
 require_once 'controleur_stats.php';
 require_once 'controleur_recherche.php';
+require_once 'controleur_examen.php';
+//require_once 'controleur_e4.php';
 
 
 

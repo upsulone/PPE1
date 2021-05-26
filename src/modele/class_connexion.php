@@ -17,9 +17,9 @@
         public function __construct($db)
         {
             $this->db = $db;    //je parle à db dans le private et je lui donne la valeur qui est dans le __construct
-            $this->connexion = $db->prepare("insert into connexions(emailco, dateco) values (:emailco, :dateco)");
+            $this->connexion = $db->prepare("insert into connexions(emailco, dateco, valide) values (:emailco, :dateco, :valide)");
             $this->select = $db->prepare("select idco, dateco, emailco from connexions order by dateco desc");
-            $this->selectLimit = $db->prepare("select idco, dateco, emailco from connexions order by dateco desc limit :inf,:limite");
+            $this->selectLimit = $db->prepare("select idco, dateco, emailco, valide from connexions order by dateco desc limit :inf,:limite");
             $this->selectLimitEmail = $db->prepare("select emailco, dateco, idco from connexions where emailco= :emailco order by dateco desc limit :inf,:limite");
             $this->selectCount = $db->prepare("select count(*) as nb from connexions");
             $this->selectCountEmail = $db->prepare("select count(*) as nb from connexions where emailco=:emailco");
@@ -28,10 +28,10 @@
             $this->selectJour = $db->prepare("SELECT HOUR(dateco) as Heures, COUNT(*) as NombreDeCoParHeure FROM connexions WHERE dateco BETWEEN :datedebutjour AND :datefinjour GROUP BY HOUR(dateco)");
         }
 
-        public function connexion($inputEmail, $dateco)
+        public function connexion($inputEmail, $dateco, $valide)
         {
             $r = true;
-            $this->connexion->execute(array(':emailco' => $inputEmail, ':dateco' => $dateco));  //on exécute les requètes préparés dans le prepare et on affecte les valeurs SQL aux valeurs du formulaire. ATTENTION à l'ordre et à la position !!
+            $this->connexion->execute(array(':emailco' => $inputEmail, ':dateco' => $dateco, ':valide' => $valide));  //on exécute les requètes préparés dans le prepare et on affecte les valeurs SQL aux valeurs du formulaire. ATTENTION à l'ordre et à la position !!
             if ($this->connexion->errorCode() != 0) {
                 print_r($this->connexion->errorInfo());
                 $r = false;

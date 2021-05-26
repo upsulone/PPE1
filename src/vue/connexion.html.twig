@@ -9,17 +9,8 @@
         {% if form.valide == true %}
             <div class="wrapper" style="text-align: center">
                 <h1 class="h3 mb-3 font-weight-normal">Connexion réussie</h1>
-                <h1 class="h3 mb-3 font-weight-normal">Voici votre identifiant : {{ form.email }}</h1>
             </div>
-            {% if form.role == 1 %}
-                <div class="wrapper" style="text-align: center">
-                    <h1 class="h3 mb-3 font-weight-normal">Vous êtes administrateur du site</h1>
-                </div>
-            {% else %}
-                <div class="wrapper" style="text-align: center">
-                    <h1 class="h3 mb-3 font-weight-normal">Vous êtes un développeur du site </h1>
-                </div>
-            {% endif %}
+
         {% else %}
             <div class="wrapper" style="text-align: center">
                 <h1 class="h3 mb-3 font-weight-normal">Echec de la connexion</h1>

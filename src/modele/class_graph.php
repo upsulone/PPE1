@@ -34,12 +34,18 @@ class Graphique {
         if ($type == 'barres3') {
             $axe = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24');
             $graph = $this->barres($dataly, $axe);
+
         } elseif ($type == 'barres2') {
             $axe = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31');
             $graph = $this->barres($dataly, $axe);
+
         } elseif ($type == 'barres') {
             $axe = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
             $graph = $this->barres($dataly, $axe);
+
+        } elseif ($type == 'barresExam') {
+            $graph = $this->Pie($dataly);
+
         } else {
             $graph = $this->Pie($dataly);
         }

@@ -1,20 +1,35 @@
 {% extends "base.html.twig" %}
-{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block style %}
+    <link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
 {% block title %} {{ parent() }} Logs Utilisateurs {% endblock %}
 
 {% block contenu %}
 
     <div class="wrapper" style="text-align: center">
 
-        <br /><br />
+        <br/><br/>
         <div class="col-lg-12 col-sm-12">
             <div class="panel panel-default">
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
-                        <tr><th style="text-align: center">Email :</th><th style="text-align: center">Date de connexion :</th></tr>
-                                {% for c in liste %}
-                            <tr><td style="text-align: center">{{c.emailco}}</td><td style="text-align: center">{{c.dateco}}</td></tr>
+                        <tr>
+                            <th style="text-align: center">Email :</th>
+                            <th style="text-align: center">Date de connexion :</th>
+                            <th style="text-align: center">Status :</th>
+                        </tr>
+                        {% for c in liste %}
+                            <tr>
+                                <td style="text-align: center">{{ c.emailco }}</td>
+                                <td style="text-align: center">{{ c.dateco }}</td>
+
+                                {# Regarder si c'est un succès ou un echec en fonction de 1 ou 0 #}
+                                {% if c.valide == 1 %}
+                                    <td style="text-align: center">Succès</td>
+                                {% else %}
+                                    <td style="text-align: center">Echec</td>
+                                {% endif %}
+                            </tr>
                         {% endfor %}
                     </table>
 
@@ -29,7 +44,7 @@
                             </li>
                             {% for i in 1..nb %}
                                 <li><a href="index.php?page=logsadmin&nopage={{ i-1 }}">{{ i }}</a></li>
-                                {% endfor %}
+                            {% endfor %}
                             <li>
                                 <a href="index.php?page=logsadmin&nopage={{ nb-1 }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
@@ -39,16 +54,14 @@
                     </nav>
 
 
-                    </div>
-
                 </div>
+
             </div>
-
-
-
-
         </div>
-        <br/><br/><br/>
 
-        {% endblock %}  
+
+    </div>
+    <br/><br/><br/>
+
+{% endblock %}
         
